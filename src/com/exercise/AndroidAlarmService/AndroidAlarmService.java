@@ -25,8 +25,7 @@ private Intent myIntent;
      Button buttonCancel = (Button)findViewById(R.id.cancelalarm);
   
      buttonStart.setOnClickListener(new Button.OnClickListener(){
-
-	  @Override
+	 @Override
 	  public void onClick(View arg0) {
 		   myIntent = new Intent(AndroidAlarmService.this, MyAlarmService.class);
 		   pendingIntent = PendingIntent.getService(AndroidAlarmService.this, 0, myIntent, 0);
@@ -34,13 +33,12 @@ private Intent myIntent;
 		   Calendar calendar = Calendar.getInstance();
 		   calendar.setTimeInMillis(System.currentTimeMillis());
 		   calendar.add(Calendar.SECOND, 5);
-		   alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+		   alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),60 * 1000, pendingIntent);
 		   Toast.makeText(AndroidAlarmService.this, "Start Alarm", Toast.LENGTH_LONG).show();
 	  }});
   
      buttonCancel.setOnClickListener(new Button.OnClickListener(){
-
-	  @Override
+     @Override
 	  public void onClick(View arg0) {
 		    AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
 			alarmManager.cancel(pendingIntent);
